@@ -1,16 +1,19 @@
 agent:
-  id: "epamdemotest"
-  team: "platform-eng"
+  id: epamdemotest
+  team: platform-eng
   runtime: aks
-  interaction_model: "standalone"
-  guardrail_profile: "moderate"
-
+  interaction_model: standalone
+  guardrail_profile: moderate
 identity:
-  sp_client_id: "1d41f2df-b7fe-4596-a5b0-ee6e23d4e118"
-  keyvault_url: "https://kv-agenticdemo-poc.vault.azure.net/"
-
-tools: []
-
+  sp_client_id: 1d41f2df-b7fe-4596-a5b0-ee6e23d4e118
+  keyvault_url: https://kv-agenticdemo-poc.vault.azure.net/
+tools:
+  - id: testtool2
+    roles:
+      - testtool2.write
+      - testtool2.read
+    apim_base_url: https://apim-agenticdemo-poc.azure-api.net/tools/testtool2
+    scope: api://5b2a0022-6486-4ef5-84e3-d3ce725d7fb8/.default
 evaluation:
   suite: default-strict
   ci_gate: true
@@ -20,13 +23,11 @@ evaluation:
       version: v1.0
       source: repo
       path: evals/datasets/golden-dataset.json
-
 output_policy:
   violation_threshold: 4
   window_minutes: 1
   action: block
-  notify_webhook: 
-
+  notify_webhook: null
 prompts:
   active_version: v1.0
   source: prompts/system.txt
